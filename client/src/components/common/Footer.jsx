@@ -20,7 +20,7 @@ export default function Footer() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.5rem', maxWidth: '320px' }}>
               Discover verified local businesses, expert IT services, trusted healthcare, dining, and professional corporate consultancies in your city.
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+            {/* <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.88rem', color: 'var(--text-muted)' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <MapPin size={15} /> 100 Innovation Blvd, Silicon Valley, CA
               </span>
@@ -30,7 +30,7 @@ export default function Footer() {
               <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <Mail size={15} /> contact@breservices.com
               </span>
-            </div>
+            </div> */}
           </div>
 
           {/* Quick Links */}
@@ -39,8 +39,8 @@ export default function Footer() {
             <ul className="footer-links">
               <li><Link to="/" className="footer-link">Home</Link></li>
               <li><Link to="/businesses" className="footer-link">All Businesses</Link></li>
-              <li><Link to="/about" className="footer-link">About Directory</Link></li>
-              <li><Link to="/contact" className="footer-link">Contact Us</Link></li>
+              {/* <li><Link to="/about" className="footer-link">About Directory</Link></li>
+              <li><Link to="/contact" className="footer-link">Contact Us</Link></li> */}
             </ul>
           </div>
 
@@ -64,9 +64,9 @@ export default function Footer() {
             <p style={{ fontSize: '0.88rem', color: 'var(--text-secondary)', lineHeight: '1.6', marginBottom: '1rem' }}>
               Every listing is curated and verified by our administrative editorial board to guarantee accurate business contact details and addresses.
             </p>
-            <div style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '0.75rem', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
+            {/* <div style={{ background: 'var(--bg-subtle)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: '0.75rem', fontSize: '0.82rem', color: 'var(--text-muted)' }}>
               🔒 Public users browse freely. Verified business profiles.
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -75,10 +75,10 @@ export default function Footer() {
           <div>
             © {new Date().getFullYear()} BRE Services Platform. All rights reserved.
           </div>
-          <div style={{ display: 'flex', gap: '1.5rem' }}>
+          {/* <div style={{ display: 'flex', gap: '1.5rem' }}>
             <Link to="/about" className="footer-link">Privacy Policy</Link>
             <Link to="/about" className="footer-link">Terms of Service</Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

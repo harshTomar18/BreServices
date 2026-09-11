@@ -18,14 +18,29 @@ import BusinessesPage from './pages/admin/BusinessesPage';
 import BusinessFormPage from './pages/admin/BusinessFormPage';
 import CategoriesPage from './pages/admin/CategoriesPage';
 
+import { useAuth } from './context/AuthContext';
+
+function RootRoute() {
+  const { isUserAuthenticated, isAdminAuthenticated } = useAuth();
+
+  if (isAdminAuthenticated) {
+    return <Navigate to="/admin/dashboard" replace />;
+  }
+  if (isUserAuthenticated) {
+    return <Navigate to="/businesses" replace />;
+  }
+  return <Navigate to="/login" replace />;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         {/* Public Website Flow */}
         <Route element={<PublicLayout />}>
-          {/* Landing Page (Public Intro when logged out, Full Directory when logged in) */}
-          <Route path="/" element={<HomePage />} />
+          {/* Direct entry: Opens login page if not logged in, or directory if logged in */}
+          <Route path="/" element={<RootRoute />} />
+          <Route path="/home" element={<HomePage />} />
 
           {/* User Auth Routes */}
           <Route path="/login" element={<LoginPage />} />

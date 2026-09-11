@@ -59,7 +59,6 @@ export default function UserNavbar() {
     e.preventDefault();
     if (navSearch.trim()) {
       navigate(`/businesses?search=${encodeURIComponent(navSearch.trim())}`);
-      setMobileMenuOpen(false);
     } else {
       navigate('/businesses');
     }
@@ -93,8 +92,7 @@ export default function UserNavbar() {
   const handleLogout = () => {
     logoutUser();
     addToast('You have been securely signed out.', 'info');
-    navigate('/');
-    setMobileMenuOpen(false);
+    navigate('/login');
   };
 
   const userInitial = currentUser?.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
@@ -107,7 +105,6 @@ export default function UserNavbar() {
         <Link
           to="/"
           className="nav-brand"
-          onClick={() => setMobileMenuOpen(false)}
           aria-label="BRE Services Home"
         >
           <div className="brand-icon" style={{ background: 'var(--primary)' }}>
@@ -173,26 +170,6 @@ export default function UserNavbar() {
               >
                 <Building size={16} style={{ marginRight: '0.25rem' }} />
                 <span>Businesses</span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                Contact
               </NavLink>
             </li>
           </ul>

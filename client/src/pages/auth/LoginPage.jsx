@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import {
   Lock,
@@ -21,10 +21,18 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
 
-  const { loginUser, loading } = useAuth();
+  const { loginUser, loading, isUserAuthenticated, isAdminAuthenticated } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (isAdminAuthenticated) {
+      navigate('/admin/dashboard', { replace: true });
+    } else if (isUserAuthenticated) {
+      navigate('/businesses', { replace: true });
+    }
+  }, [isUserAuthenticated, isAdminAuthenticated, navigate]);
 
   const from = location.state?.from?.pathname || '/businesses';
 
