@@ -1,7 +1,7 @@
 /**
  * Unified API Client for backend communication
  */
-const API_BASE_URL = '/api/v1';
+const API_BASE_URL = `${import.meta.env.VITE_API_URL || ''}/api/v1`;
 
 export async function fetchHealth() {
   const response = await fetch(`${API_BASE_URL}/health`);
