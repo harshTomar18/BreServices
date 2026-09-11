@@ -1,20 +1,7 @@
-import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import {
-  Building2,
-  LogIn,
-  UserPlus,
-  Menu,
-  X,
-  Sparkles,
-  ArrowRight,
-  Search,
-  ShieldCheck
-} from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Building2, LogIn, UserPlus } from 'lucide-react';
 
 export default function LandingNavbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
     <header className="public-navbar landing-navbar">
       <div className="container navbar-container">
@@ -22,7 +9,6 @@ export default function LandingNavbar() {
         <Link
           to="/"
           className="nav-brand"
-          onClick={() => setMobileMenuOpen(false)}
           aria-label="BRE Services Home"
         >
           <div className="brand-icon">
@@ -38,69 +24,9 @@ export default function LandingNavbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="desktop-nav" aria-label="Main Navigation">
-          <ul className="nav-menu">
-            <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-                end
-              >
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/businesses"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                <span>Directory</span>
-                <span
-                  style={{
-                    marginLeft: '0.35rem',
-                    fontSize: '0.7rem',
-                    background: 'var(--primary-subtle)',
-                    color: 'var(--primary)',
-                    padding: '0.15rem 0.45rem',
-                    borderRadius: '10px',
-                    fontWeight: 700,
-                  }}
-                >
-                  Explore
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  isActive ? 'nav-link active' : 'nav-link'
-                }
-              >
-                Contact
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-
-        {/* Desktop Actions (Sign In & Get Started) */}
+        {/* Action Buttons (Sign In & Create Account) */}
         <div className="nav-actions">
-          <div className="landing-auth-buttons">
+          <div className="landing-auth-buttons" style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
             <Link to="/login" className="btn btn-secondary btn-sm" id="landing-nav-login">
               <LogIn size={15} />
               <span>Sign In</span>
@@ -110,74 +36,8 @@ export default function LandingNavbar() {
               <span>Create Account</span>
             </Link>
           </div>
-
-          {/* Mobile hamburger button */}
-          <button
-            className="mobile-nav-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
       </div>
-
-      {/* Mobile Drawer for Landing Page */}
-      {mobileMenuOpen && (
-        <div className="mobile-nav-drawer">
-          <div className="mobile-nav-links">
-            <NavLink
-              to="/"
-              className="mobile-nav-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </NavLink>
-            <NavLink
-              to="/businesses"
-              className="mobile-nav-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Directory Listings
-            </NavLink>
-            <NavLink
-              to="/about"
-              className="mobile-nav-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About BRE Services
-            </NavLink>
-            <NavLink
-              to="/contact"
-              className="mobile-nav-item"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact Support
-            </NavLink>
-          </div>
-
-          <div className="mobile-nav-actions">
-            <Link
-              to="/login"
-              className="btn btn-secondary"
-              style={{ width: '100%', justifyContent: 'center' }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <LogIn size={16} />
-              <span>Sign In</span>
-            </Link>
-            <Link
-              to="/register"
-              className="btn btn-primary"
-              style={{ width: '100%', justifyContent: 'center' }}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              <UserPlus size={16} />
-              <span>Create Free Account</span>
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
