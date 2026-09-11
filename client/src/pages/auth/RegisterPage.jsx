@@ -192,7 +192,7 @@ export default function RegisterPage() {
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. John Miller"
+                  placeholder="e.g. Rahul Sharma"
                   className="auth-input"
                 />
                 <User size={18} className="input-icon-left" />
@@ -208,7 +208,7 @@ export default function RegisterPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="john@example.com"
+                  placeholder="rahul.sharma@example.com"
                   className="auth-input"
                 />
                 <Mail size={18} className="input-icon-left" />

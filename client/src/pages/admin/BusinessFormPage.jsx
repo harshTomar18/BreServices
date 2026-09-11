@@ -670,7 +670,7 @@ export default function BusinessFormPage() {
                 setFormData({ ...formData, name: e.target.value });
                 if (errors.name) setErrors({ ...errors, name: '' });
               }}
-              placeholder="e.g. Acme Technologies Inc."
+              placeholder="e.g. Tata Consultancy Services, Apollo Healthcare, GSR Enterprises"
               className={`form-input ${errors.name ? 'has-error' : ''}`}
             />
             {errors.name && (
@@ -921,7 +921,7 @@ export default function BusinessFormPage() {
                     type="url"
                     value={formData.image}
                     onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                    placeholder="e.g. https://images.unsplash.com/photo-... or https://mycompany.com/logo.jpg"
+                    placeholder="e.g. https://example.com/logo.jpg or upload image below"
                     className="form-input"
                     style={{ paddingLeft: '2.5rem' }}
                   />
@@ -1024,7 +1024,7 @@ export default function BusinessFormPage() {
                   setFormData({ ...formData, location: e.target.value });
                   if (errors.location) setErrors({ ...errors, location: '' });
                 }}
-                placeholder="e.g. San Francisco, CA or Noida, UP"
+                placeholder="e.g. New Delhi, Lucknow, Mumbai, Bengaluru, Noida"
                 className={`form-input ${errors.location ? 'has-error' : ''}`}
               />
               {errors.location && (
@@ -1142,7 +1142,7 @@ export default function BusinessFormPage() {
                   setFormData({ ...formData, website: e.target.value });
                   if (errors.website) setErrors({ ...errors, website: '' });
                 }}
-                placeholder="https://company.example.com"
+                placeholder="https://www.company.com"
                 className={`form-input ${errors.website ? 'has-error' : ''}`}
               />
               {errors.website && (
