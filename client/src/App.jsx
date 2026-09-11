@@ -27,7 +27,7 @@ function RootRoute() {
     return <Navigate to="/admin/dashboard" replace />;
   }
   if (isUserAuthenticated) {
-    return <Navigate to="/businesses" replace />;
+    return <HomePage />;
   }
   return <Navigate to="/login" replace />;
 }
