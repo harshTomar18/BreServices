@@ -7,7 +7,6 @@ import Pagination from '../../components/common/Pagination';
 import {
   PlusCircle,
   Search,
-  Eye,
   Edit,
   Trash2,
   Filter,
@@ -274,14 +273,6 @@ export default function BusinessesPage() {
                     </td>
                     <td>
                       <div className="action-buttons" style={{ justifyContent: 'flex-end' }}>
-                        <Link
-                          to={`/business/${biz.id}`}
-                          target="_blank"
-                          className="btn-icon"
-                          title="View Details"
-                        >
-                          <Eye size={15} />
-                        </Link>
                         <Link
                           to={`/admin/businesses/${biz.id}/edit`}
                           className="btn-icon"

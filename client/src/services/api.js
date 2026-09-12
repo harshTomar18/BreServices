@@ -225,4 +225,64 @@ export async function fetchCategoriesApi() {
   return data.data;
 }
 
+/**
+ * Create a new category in backend MongoDB
+ * @param {object} categoryData
+ */
+export async function createCategoryApi(categoryData) {
+  const response = await fetch(`${API_BASE_URL}/categories`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(categoryData),
+  });
+
+  const data = await response.json();
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || 'Failed to create category');
+  }
+
+  return data.data;
+}
+
+/**
+ * Update an existing category in backend MongoDB and sync assigned businesses
+ * @param {string} id
+ * @param {object} categoryData
+ */
+export async function updateCategoryApi(id, categoryData) {
+  const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(categoryData),
+  });
+
+  const data = await response.json();
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || 'Failed to update category');
+  }
+
+  return data.data;
+}
+
+/**
+ * Delete a category in backend MongoDB
+ * @param {string} id
+ */
+export async function deleteCategoryApi(id) {
+  const response = await fetch(`${API_BASE_URL}/categories/${id}`, {
+    method: 'DELETE',
+  });
+
+  const data = await response.json();
+  if (!response.ok || !data.success) {
+    throw new Error(data.message || 'Failed to delete category');
+  }
+
+  return data.data;
+}
+
 

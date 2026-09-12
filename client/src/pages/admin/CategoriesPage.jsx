@@ -2,41 +2,75 @@ import { useState } from 'react';
 import { useDirectory } from '../../context/DirectoryContext';
 import { useToast } from '../../context/ToastContext';
 import Modal from '../../components/common/Modal';
-import { FolderTree, PlusCircle, Trash2, Tag, Layers, CheckCircle2 } from 'lucide-react';
+import { FolderTree, PlusCircle, Trash2, Tag, Layers, CheckCircle2, Edit } from 'lucide-react';
 
 export default function CategoriesPage() {
-  const { categories, businesses, createCategory, deleteCategory } = useDirectory();
+  const { categories, businesses, createCategory, updateCategory, deleteCategory } = useDirectory();
   const { addToast } = useToast();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
   const [catName, setCatName] = useState('');
   const [catDesc, setCatDesc] = useState('');
   const [catIcon, setCatIcon] = useState('Folder');
+  const [isSaving, setIsSaving] = useState(false);
 
   // Count businesses in each category
   const getCategoryCount = (categoryName) => {
     return businesses.filter(
-      (b) => b.category.toLowerCase() === categoryName.toLowerCase()
+      (b) => b.category && b.category.toLowerCase() === categoryName.toLowerCase()
     ).length;
   };
 
-  const handleCreate = (e) => {
+  const openAddModal = () => {
+    setEditingCategory(null);
+    setCatName('');
+    setCatDesc('');
+    setCatIcon('Folder');
+    setModalOpen(true);
+  };
+
+  const openEditModal = (category) => {
+    setEditingCategory(category);
+    setCatName(category.name);
+    setCatDesc(category.description || '');
+    setCatIcon(category.icon || 'Folder');
+    setModalOpen(true);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!catName.trim()) return;
 
-    createCategory({
-      name: catName,
-      description: catDesc,
-      icon: catIcon,
-    });
-
-    addToast(`Category "${catName}" created successfully!`, 'success');
-    setCatName('');
-    setCatDesc('');
-    setModalOpen(false);
+    setIsSaving(true);
+    try {
+      if (editingCategory) {
+        await updateCategory(editingCategory.id || editingCategory._id, {
+          name: catName.trim(),
+          description: catDesc.trim(),
+          icon: catIcon,
+        });
+        addToast(`Category "${catName}" updated and synced successfully!`, 'success');
+      } else {
+        await createCategory({
+          name: catName.trim(),
+          description: catDesc.trim(),
+          icon: catIcon,
+        });
+        addToast(`Category "${catName}" created successfully!`, 'success');
+      }
+      setModalOpen(false);
+      setEditingCategory(null);
+      setCatName('');
+      setCatDesc('');
+    } catch (err) {
+      addToast(err.message || 'Failed to save category', 'error');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
-  const handleDelete = (category) => {
+  const handleDelete = async (category) => {
     const count = getCategoryCount(category.name);
     if (count > 0) {
       if (
@@ -47,8 +81,12 @@ export default function CategoriesPage() {
         return;
       }
     }
-    deleteCategory(category.id);
-    addToast(`Category "${category.name}" removed`, 'info');
+    try {
+      await deleteCategory(category.id || category._id);
+      addToast(`Category "${category.name}" removed`, 'info');
+    } catch (err) {
+      addToast(err.message || 'Failed to delete category', 'error');
+    }
   };
 
   return (
@@ -62,7 +100,7 @@ export default function CategoriesPage() {
           </p>
         </div>
 
-        <button onClick={() => setModalOpen(true)} className="btn btn-primary">
+        <button onClick={openAddModal} className="btn btn-primary">
           <PlusCircle size={16} />
           <span>Add New Category</span>
         </button>
@@ -94,7 +132,7 @@ export default function CategoriesPage() {
               {categories.map((cat) => {
                 const count = getCategoryCount(cat.name);
                 return (
-                  <tr key={cat.id}>
+                  <tr key={cat.id || cat._id}>
                     <td>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                         <div
@@ -138,6 +176,13 @@ export default function CategoriesPage() {
                     <td>
                       <div className="action-buttons" style={{ justifyContent: 'flex-end' }}>
                         <button
+                          onClick={() => openEditModal(cat)}
+                          className="btn-icon"
+                          title="Edit Category"
+                        >
+                          <Edit size={15} />
+                        </button>
+                        <button
                           onClick={() => handleDelete(cat)}
                           className="btn-icon btn-icon-danger"
                           title="Delete Category"
@@ -154,9 +199,13 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      {/* Add Category Modal */}
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title="Create New Category">
-        <form onSubmit={handleCreate}>
+      {/* Add / Edit Category Modal */}
+      <Modal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={editingCategory ? `Edit Category: ${editingCategory.name}` : 'Create New Category'}
+      >
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">
               Category Name <span className="req">*</span>
@@ -169,6 +218,11 @@ export default function CategoriesPage() {
               placeholder="e.g. Legal & Consulting"
               className="form-input"
             />
+            {editingCategory && (
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.35rem' }}>
+                Note: Updating this name will automatically synchronize all businesses currently assigned to &quot;{editingCategory.name}&quot;.
+              </p>
+            )}
           </div>
 
           <div className="form-group">
@@ -187,11 +241,12 @@ export default function CategoriesPage() {
               type="button"
               onClick={() => setModalOpen(false)}
               className="btn btn-secondary"
+              disabled={isSaving}
             >
               Cancel
             </button>
-            <button type="submit" className="btn btn-primary">
-              Create Category
+            <button type="submit" className="btn btn-primary" disabled={isSaving}>
+              {isSaving ? 'Saving...' : editingCategory ? 'Save Changes' : 'Create Category'}
             </button>
           </div>
         </form>

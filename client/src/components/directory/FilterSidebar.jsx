@@ -24,22 +24,22 @@ export default function FilterSidebar({
   const dynamicCategoryList = useMemo(() => {
     const list = [{ name: 'All Categories', count: totalActiveCount || 0, key: '' }];
     
-    // Default categories to ensure core taxonomy is always present if categories array is minimal
-    const standardTaxonomy = [
-      'IT Services',
-      'Restaurants',
-      'Healthcare',
-      'Education',
-      'Real Estate',
-      'Finance',
-    ];
-
-    const allCatNames = new Set(standardTaxonomy);
-    if (Array.isArray(categories)) {
+    const allCatNames = new Set();
+    if (Array.isArray(categories) && categories.length > 0) {
       categories.forEach((c) => {
         const name = typeof c === 'string' ? c : c.name;
         if (name) allCatNames.add(name);
       });
+    } else {
+      const standardTaxonomy = [
+        'IT Services',
+        'Restaurants',
+        'Healthcare',
+        'Education',
+        'Real Estate',
+        'Finance',
+      ];
+      standardTaxonomy.forEach((name) => allCatNames.add(name));
     }
 
     allCatNames.forEach((catName) => {

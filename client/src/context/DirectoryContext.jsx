@@ -5,6 +5,9 @@ import {
   createBusinessApi,
   updateBusinessApi,
   deleteBusinessApi,
+  createCategoryApi,
+  updateCategoryApi,
+  deleteCategoryApi,
 } from '../services/api';
 
 const DirectoryContext = createContext(null);
@@ -100,21 +103,54 @@ export function DirectoryProvider({ children }) {
     }
   };
 
-  // Category operations
-  const createCategory = (data) => {
-    const newCat = {
-      id: 'cat-' + Date.now(),
-      name: data.name.trim(),
-      slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-      icon: data.icon || 'Folder',
-      description: data.description?.trim() || '',
-    };
-    setCategories((prev) => [...prev, newCat]);
-    return newCat;
+  // Category CRUD operations backed by MongoDB
+  const createCategory = async (data) => {
+    try {
+      const created = await createCategoryApi(data);
+      setCategories((prev) => [...prev, created]);
+      return created;
+    } catch (err) {
+      console.error('Error creating category in MongoDB:', err);
+      throw err;
+    }
   };
 
-  const deleteCategory = (id) => {
-    setCategories((prev) => prev.filter((c) => c.id !== id));
+  const updateCategory = async (id, data) => {
+    try {
+      const updated = await updateCategoryApi(id, data);
+      setCategories((prev) =>
+        prev.map((c) => (c.id === id || c._id === id ? { ...c, ...updated } : c))
+      );
+
+      // If category name was renamed, instantly update businesses in local state!
+      if (updated.oldName && updated.name) {
+        setBusinesses((prev) =>
+          prev.map((b) =>
+            b.category?.toLowerCase() === updated.oldName.toLowerCase()
+              ? { ...b, category: updated.name }
+              : b
+          )
+        );
+      }
+
+      // Background reload to sync aggregated counts
+      loadDirectoryData();
+      return updated;
+    } catch (err) {
+      console.error('Error updating category in MongoDB:', err);
+      throw err;
+    }
+  };
+
+  const deleteCategory = async (id) => {
+    try {
+      await deleteCategoryApi(id);
+      setCategories((prev) => prev.filter((c) => c.id !== id && c._id !== id));
+      loadDirectoryData();
+    } catch (err) {
+      console.error('Error deleting category from MongoDB:', err);
+      throw err;
+    }
   };
 
   const refreshData = () => {
@@ -137,6 +173,7 @@ export function DirectoryProvider({ children }) {
         updateBusiness,
         deleteBusiness,
         createCategory,
+        updateCategory,
         deleteCategory,
         refreshData,
       }}

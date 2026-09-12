@@ -7,8 +7,7 @@ import {
   FolderTree,
   Clock,
   PlusCircle,
-  Edit,
-  Eye
+  Edit
 } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -118,14 +117,6 @@ export default function DashboardPage() {
                   </td>
                   <td>
                     <div className="action-buttons" style={{ justifyContent: 'flex-end' }}>
-                      <Link
-                        to={`/business/${biz.id}`}
-                        target="_blank"
-                        className="btn-icon"
-                        title="View Public Profile"
-                      >
-                        <Eye size={15} />
-                      </Link>
                       <Link
                         to={`/admin/businesses/${biz.id}/edit`}
                         className="btn-icon"

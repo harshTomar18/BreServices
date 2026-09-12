@@ -97,17 +97,45 @@ const getCategoryMeta = (catName) => {
       glow: 'rgba(220, 38, 38, 0.2)',
     },
   };
-  return (
-    map[catName] || {
-      icon: Boxes,
-      bg: 'linear-gradient(135deg, rgba(71, 85, 105, 0.15), rgba(100, 116, 139, 0.08))',
-      color: '#475569',
-      subtitle: 'Commercial enterprises & services',
-      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.65) 100%)',
-      accentGrad: 'linear-gradient(90deg, #475569, #64748b)',
-      glow: 'rgba(71, 85, 105, 0.18)',
-    }
-  );
+
+  if (map[catName]) return map[catName];
+
+  // Smart case-insensitive or keyword match for renamed/custom categories
+  const lower = (catName || '').toLowerCase();
+  if (lower.includes('it') || lower.includes('software') || lower.includes('tech') || lower.includes('code') || lower.includes('cloud')) {
+    return map['IT Services'];
+  }
+  if (lower.includes('restaurant') || lower.includes('food') || lower.includes('cafe') || lower.includes('dining')) {
+    return map['Restaurants'];
+  }
+  if (lower.includes('health') || lower.includes('medic') || lower.includes('clinic') || lower.includes('doctor') || lower.includes('care')) {
+    return map['Healthcare'];
+  }
+  if (lower.includes('educat') || lower.includes('school') || lower.includes('academy') || lower.includes('training') || lower.includes('institute')) {
+    return map['Education'];
+  }
+  if (lower.includes('estate') || lower.includes('property') || lower.includes('space') || lower.includes('real')) {
+    return map['Real Estate'];
+  }
+  if (lower.includes('finan') || lower.includes('bank') || lower.includes('tax') || lower.includes('audit') || lower.includes('legal') || lower.includes('consult')) {
+    return map['Finance'];
+  }
+  if (lower.includes('shop') || lower.includes('retail') || lower.includes('store') || lower.includes('market')) {
+    return map['Shopping'];
+  }
+  if (lower.includes('gym') || lower.includes('fit') || lower.includes('sport') || lower.includes('wellness')) {
+    return map['Gym'];
+  }
+
+  return {
+    icon: Boxes,
+    bg: 'linear-gradient(135deg, rgba(71, 85, 105, 0.15), rgba(100, 116, 139, 0.08))',
+    color: '#475569',
+    subtitle: 'Commercial enterprises & services',
+    cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.65) 100%)',
+    accentGrad: 'linear-gradient(90deg, #475569, #64748b)',
+    glow: 'rgba(71, 85, 105, 0.18)',
+  };
 };
 
 const extractDynamicTags = (biz) => {
