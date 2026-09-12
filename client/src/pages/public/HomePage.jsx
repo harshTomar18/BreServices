@@ -18,20 +18,96 @@ import {
   Boxes,
   MapPin,
   Phone,
-  Star
+  Star,
+  Dumbbell
 } from 'lucide-react';
 
 const getCategoryMeta = (catName) => {
   const map = {
-    'IT Services': { icon: Laptop, bg: '#eff6ff', color: '#2563eb', subtitle: 'Cloud, DevOps & Custom Code' },
-    'Restaurants': { icon: Utensils, bg: '#eef2ff', color: '#4f46e5', subtitle: 'Fine Dining, Cafes & Catering' },
-    'Healthcare': { icon: Stethoscope, bg: '#f0fdfa', color: '#0d9488', subtitle: 'Clinics, Diagnostics & Telehealth' },
-    'Education': { icon: GraduationCap, bg: '#ecfdf5', color: '#059669', subtitle: 'Academies, Training & Institutes' },
-    'Real Estate': { icon: Building2, bg: '#f5f3ff', color: '#7c3aed', subtitle: 'Commercial Parks & Advisory' },
-    'Finance': { icon: Landmark, bg: '#eff6ff', color: '#1d4ed8', subtitle: 'Taxation, Audit & Capital Advisory' },
-    'Shopping': { icon: ShoppingBag, bg: '#fdf2f8', color: '#db2777', subtitle: 'Wholesale, Retail & Distribution' },
+    'IT Services': {
+      icon: Laptop,
+      bg: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(59, 130, 246, 0.08))',
+      color: '#2563eb',
+      subtitle: 'Software, cloud, web & IT support',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(239, 246, 255, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #2563eb, #3b82f6)',
+      glow: 'rgba(37, 99, 235, 0.2)',
+    },
+    'Restaurants': {
+      icon: Utensils,
+      bg: 'linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(99, 102, 241, 0.08))',
+      color: '#4f46e5',
+      subtitle: 'Dining, cafes, executive catering',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(238, 242, 255, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #4f46e5, #6366f1)',
+      glow: 'rgba(79, 70, 229, 0.2)',
+    },
+    'Healthcare': {
+      icon: Stethoscope,
+      bg: 'linear-gradient(135deg, rgba(13, 148, 136, 0.15), rgba(20, 184, 166, 0.08))',
+      color: '#0d9488',
+      subtitle: 'Clinics, diagnostic centers & wellness',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #0d9488, #14b8a6)',
+      glow: 'rgba(13, 148, 136, 0.2)',
+    },
+    'Education': {
+      icon: GraduationCap,
+      bg: 'linear-gradient(135deg, rgba(5, 150, 105, 0.15), rgba(16, 185, 129, 0.08))',
+      color: '#059669',
+      subtitle: 'Academies, coaching & professional STEM',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(236, 253, 245, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #059669, #10b981)',
+      glow: 'rgba(5, 150, 105, 0.2)',
+    },
+    'Real Estate': {
+      icon: Building2,
+      bg: 'linear-gradient(135deg, rgba(124, 58, 237, 0.15), rgba(139, 92, 246, 0.08))',
+      color: '#7c3aed',
+      subtitle: 'Commercial leases & managed spaces',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 243, 255, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #7c3aed, #8b5cf6)',
+      glow: 'rgba(124, 58, 237, 0.2)',
+    },
+    'Finance': {
+      icon: Landmark,
+      bg: 'linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(14, 165, 233, 0.08))',
+      color: '#0284c7',
+      subtitle: 'Corporate taxation, legal & advisory',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 249, 255, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #0284c7, #0ea5e9)',
+      glow: 'rgba(2, 132, 199, 0.2)',
+    },
+    'Shopping': {
+      icon: ShoppingBag,
+      bg: 'linear-gradient(135deg, rgba(219, 39, 119, 0.15), rgba(236, 72, 153, 0.08))',
+      color: '#db2777',
+      subtitle: 'Wholesale, retail & merchant goods',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(253, 242, 248, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #db2777, #ec4899)',
+      glow: 'rgba(219, 39, 119, 0.2)',
+    },
+    'Gym': {
+      icon: Dumbbell,
+      bg: 'linear-gradient(135deg, rgba(220, 38, 38, 0.15), rgba(239, 68, 68, 0.08))',
+      color: '#dc2626',
+      subtitle: 'Fitness, strength & wellness centers',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(254, 242, 242, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #dc2626, #ef4444)',
+      glow: 'rgba(220, 38, 38, 0.2)',
+    },
   };
-  return map[catName] || { icon: Boxes, bg: '#f8fafc', color: '#475569', subtitle: 'Commercial Enterprises & Services' };
+  return (
+    map[catName] || {
+      icon: Boxes,
+      bg: 'linear-gradient(135deg, rgba(71, 85, 105, 0.15), rgba(100, 116, 139, 0.08))',
+      color: '#475569',
+      subtitle: 'Commercial enterprises & services',
+      cardBg: 'linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.65) 100%)',
+      accentGrad: 'linear-gradient(90deg, #475569, #64748b)',
+      glow: 'rgba(71, 85, 105, 0.18)',
+    }
+  );
 };
 
 const extractDynamicTags = (biz) => {
@@ -113,18 +189,6 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
-
-              <div className="welcome-meta-stats">
-                <div className="meta-stat-item">
-                  <span className="meta-stat-dot"></span>
-                  <span>100% Human Audited</span>
-                </div>
-                <div className="meta-stat-divider"></div>
-                <div className="meta-stat-item">
-                  <Building2 size={14} color="var(--primary)" />
-                  <span>Verified Commercial Directory</span>
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -174,6 +238,13 @@ export default function HomePage() {
                     key={cat.id || cat.slug || cat.name}
                     to={`/businesses?category=${encodeURIComponent(cat.name)}`}
                     className="taxonomy-card"
+                    style={{
+                      '--card-bg': meta.cardBg,
+                      '--card-accent-grad': meta.accentGrad,
+                      '--card-glow': meta.glow,
+                      '--card-border-hover': meta.color,
+                      '--card-shadow': meta.glow,
+                    }}
                   >
                     <div className="taxonomy-card-top">
                       <div className="taxonomy-icon-box" style={{ background: meta.bg, color: meta.color }}>
@@ -352,7 +423,7 @@ export default function HomePage() {
           </h1>
 
           <p className="hero-subtitle">
-            DirectBizz is an exclusive, vetted business directory platform. Log in or create a free account to search commercial profiles, direct contact numbers, physical locations, and operating hours.
+            BER Services is an exclusive, vetted business directory platform. Log in or create a free account to search commercial profiles, direct contact numbers, physical locations, and operating hours.
           </p>
 
           {/* Call to Action Buttons */}
@@ -385,7 +456,7 @@ export default function HomePage() {
       <section className="section">
         <div className="container">
           <div style={{ textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem' }}>
-            <h2 className="section-title">What You Get Inside DirectBizz</h2>
+            <h2 className="section-title">What You Get Inside BER Services</h2>
             <p className="section-subtitle">
               Sign in to unlock our comprehensive ecosystem of professional services and local businesses.
             </p>

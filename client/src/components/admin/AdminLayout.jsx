@@ -21,13 +21,22 @@ export default function AdminLayout() {
     return <Navigate to="/businesses" replace />;
   }
 
-  // If not authenticated as admin at all, send to admin login
+  // If not authenticated as admin at all, send to unified login
   if (!hasAdminAccess) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return (
     <div className="admin-shell">
+      {/* Mobile Backdrop Overlay */}
+      {sidebarOpen && (
+        <div
+          className="admin-backdrop"
+          onClick={() => setSidebarOpen(false)}
+          aria-label="Close admin menu overlay"
+        />
+      )}
+
       <AdminSidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}

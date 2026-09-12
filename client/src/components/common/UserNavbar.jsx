@@ -105,7 +105,7 @@ export default function UserNavbar() {
         <Link
           to="/"
           className="nav-brand"
-          aria-label="BRE Services Home"
+          aria-label="BER Services Home"
         >
           <div className="brand-icon" style={{ background: 'var(--primary)' }}>
             <Building2 size={22} color="#ffffff" />
@@ -113,15 +113,9 @@ export default function UserNavbar() {
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <span style={{ fontWeight: 800, fontSize: '1.25rem', letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1.1 }}>
-                BRE Services
+                BER Services
               </span>
-              {/* <span className="user-nav-badge">
-                Directory
-              </span> */}
             </div>
-            {/* <span style={{ fontSize: '0.68rem', color: 'var(--success)', fontWeight: 600, letterSpacing: '0.02em' }}>
-              ● Verified Portal
-            </span> */}
           </div>
         </Link>
 
@@ -184,7 +178,7 @@ export default function UserNavbar() {
             </div>
             <div className="user-details-text">
               <span className="user-display-name">{displayName}</span>
-              <span className="user-role-label">BRE Member</span>
+              <span className="user-role-label">BER Member</span>
             </div>
           </div>
 
@@ -192,7 +186,7 @@ export default function UserNavbar() {
           <button
             onClick={handleLogout}
             className="btn btn-secondary btn-sm user-logout-btn"
-            title="Sign out of BRE Services"
+            title="Sign out of BER Services"
           >
             <LogOut size={15} />
             <span className="hide-on-mobile-sm">Sign Out</span>

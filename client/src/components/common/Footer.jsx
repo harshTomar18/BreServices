@@ -15,7 +15,7 @@ export default function Footer() {
               <div className="brand-icon">
                 <Building2 size={20} />
               </div>
-              <span>BRE Services</span>
+              <span>BER Services</span>
             </Link>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.92rem', lineHeight: '1.6', marginBottom: '1.5rem', maxWidth: '320px' }}>
               Discover verified local businesses, expert IT services, trusted healthcare, dining, and professional corporate consultancies in your city.
@@ -73,7 +73,7 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="footer-bottom">
           <div>
-            © {new Date().getFullYear()} BRE Services Platform. All rights reserved.
+            © {new Date().getFullYear()} BER Services Platform. All rights reserved.
           </div>
           {/* <div style={{ display: 'flex', gap: '1.5rem' }}>
             <Link to="/about" className="footer-link">Privacy Policy</Link>

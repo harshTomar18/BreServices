@@ -74,7 +74,7 @@ export function AuthProvider({ children }) {
       // If user has admin role or email is admin@bre.com, also activate adminUser
       if (user.role === 'admin' || user.email === 'admin@bre.com') {
         const adminData = {
-          name: user.name || 'BRE Admin',
+          name: user.name || 'BER Admin',
           email: user.email,
           role: 'Super Admin',
           id: user.id || user._id,
@@ -105,7 +105,7 @@ export function AuthProvider({ children }) {
       const { user, token: jwtToken } = await loginApi({ email, password });
       if (user.role === 'admin' || user.email === 'admin@bre.com') {
         const adminData = {
-          name: user.name || 'BRE Admin',
+          name: user.name || 'BER Admin',
           email: user.email,
           role: 'Super Admin',
           id: user.id || user._id,
@@ -123,7 +123,7 @@ export function AuthProvider({ children }) {
       // Fallback local check if API has issues
       if (email === 'admin@bre.com' && password === 'admin123') {
         const admin = {
-          name: 'BRE Admin',
+          name: 'BER Admin',
           email: 'admin@bre.com',
           role: 'Super Admin',
         };

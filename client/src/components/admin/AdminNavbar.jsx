@@ -6,66 +6,43 @@ export default function AdminNavbar({ onToggleSidebar }) {
 
   return (
     <header className="admin-topbar">
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+      <div className="admin-topbar-left">
         <button
           onClick={onToggleSidebar}
-          className="btn-icon mobile-nav-toggle"
-          style={{ display: 'flex' }}
+          className="admin-nav-toggle"
           aria-label="Toggle admin sidebar"
+          type="button"
         >
           <Menu size={20} />
         </button>
-        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-          BRE Services Admin Console v1.0
-        </span>
+        <div className="admin-topbar-title-group">
+          <span className="admin-topbar-title">Admin Console</span>
+          <span className="admin-topbar-badge">v1.0</span>
+        </div>
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+      <div className="admin-topbar-right">
         {/* Notification indicator */}
         <button
-          className="btn-icon"
+          className="admin-notify-btn"
           title="Notifications"
-          style={{ position: 'relative' }}
           aria-label="View notifications"
+          type="button"
         >
           <Bell size={18} />
-          <span
-            style={{
-              position: 'absolute',
-              top: '4px',
-              right: '4px',
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--primary)',
-            }}
-          />
+          <span className="admin-notify-badge" />
         </button>
 
         {/* Profile */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '50%',
-              background: 'var(--primary-subtle)',
-              color: 'var(--primary)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 700,
-              fontSize: '0.9rem',
-              border: '1px solid var(--primary-border)',
-            }}
-          >
-            {adminUser?.name ? adminUser.name.charAt(0) : <User size={18} />}
+        <div className="admin-profile-pill">
+          <div className="admin-profile-avatar">
+            {adminUser?.name ? adminUser.name.charAt(0).toUpperCase() : <User size={18} />}
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+          <div className="admin-profile-meta">
+            <span className="admin-profile-name">
               {adminUser?.name || 'Administrator'}
             </span>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+            <span className="admin-profile-role">
               {adminUser?.role || 'Super Admin'}
             </span>
           </div>

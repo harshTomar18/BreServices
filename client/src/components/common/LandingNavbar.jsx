@@ -9,14 +9,14 @@ export default function LandingNavbar() {
         <Link
           to="/"
           className="nav-brand landing-nav-brand"
-          aria-label="BRE Services Home"
+          aria-label="BER Services Home"
         >
           <div className="brand-icon landing-brand-icon">
             <Building2 size={20} />
           </div>
           <div className="landing-brand-text">
             <span className="landing-brand-title">
-              BRE Services
+              BER Services
             </span>
             <span className="landing-brand-subtitle">
               Business Directory

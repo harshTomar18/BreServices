@@ -30,11 +30,11 @@ export default function LoginPage() {
     if (isAdminAuthenticated) {
       navigate('/admin/dashboard', { replace: true });
     } else if (isUserAuthenticated) {
-      navigate('/businesses', { replace: true });
+      navigate('/', { replace: true });
     }
   }, [isUserAuthenticated, isAdminAuthenticated, navigate]);
 
-  const from = location.state?.from?.pathname || '/businesses';
+  const from = location.state?.from?.pathname || '/';
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ export default function LoginPage() {
               >
                 <Building2 size={22} color="#fff" />
               </div>
-              <span>BRE Services</span>
+              <span>BER Services</span>
             </Link>
 
             <h2 className="auth-showcase-title">
@@ -127,7 +127,7 @@ export default function LoginPage() {
           </div>
 
           {/* Testimonial Box */}
-          <div className="auth-testimonial-box">
+          {/* <div className="auth-testimonial-box">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#fbbf24', marginBottom: '0.5rem' }}>
               <Star size={14} fill="#fbbf24" />
               <Star size={14} fill="#fbbf24" />
@@ -136,12 +136,12 @@ export default function LoginPage() {
               <Star size={14} fill="#fbbf24" />
             </div>
             <p className="auth-testimonial-quote">
-              &ldquo;BRE Services made locating certified healthcare and IT consultants effortless. The information is always accurate.&rdquo;
+              &ldquo;BER Services made locating certified healthcare and IT consultants effortless. The information is always accurate.&rdquo;
             </p>
             <div className="auth-testimonial-author">
               Elena Rostova • Managing Partner at Vertex Global
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Right Side: Modern Form Panel */}

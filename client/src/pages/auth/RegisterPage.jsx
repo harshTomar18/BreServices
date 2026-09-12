@@ -67,7 +67,7 @@ export default function RegisterPage() {
     try {
       const user = await registerUser(name, email, password);
       addToast(`Account created successfully! Welcome, ${user.name}.`, 'success');
-      navigate('/businesses');
+      navigate('/');
     } catch (err) {
       const errMsg =
         err.message === 'Failed to fetch'
@@ -98,7 +98,7 @@ export default function RegisterPage() {
               >
                 <Building2 size={22} color="#fff" />
               </div>
-              <span>BRE Services</span>
+              <span>BER Services</span>
             </Link>
 
             <h2 className="auth-showcase-title">
@@ -106,7 +106,7 @@ export default function RegisterPage() {
             </h2>
 
             <p className="auth-showcase-desc">
-              Create your account to search verified companies, view full contact records, 
+              Create your account to search verified companies, view full contact records,
               and discover top-rated service providers across multiple cities.
             </p>
 
@@ -135,7 +135,7 @@ export default function RegisterPage() {
           </div>
 
           {/* Social Proof Box */}
-          <div className="auth-testimonial-box">
+          {/* <div className="auth-testimonial-box">
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#fbbf24', marginBottom: '0.5rem' }}>
               <Star size={14} fill="#fbbf24" />
               <Star size={14} fill="#fbbf24" />
@@ -149,7 +149,7 @@ export default function RegisterPage() {
             <div className="auth-testimonial-author">
               Marcus Bennett • CTO, Horizon Logistics
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Right Side: Modern Registration Form */}
